@@ -309,7 +309,7 @@ public class MiscUtils {
 
         if (sWakeLock == null) {
             sPowerManager = (PowerManager) ctx.getSystemService(POWER_SERVICE);
-            sWakeLock = sPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "UtilsWakeLock");
+            sWakeLock = sPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "MiscUtilsWakeLock");
         }
     }
 
