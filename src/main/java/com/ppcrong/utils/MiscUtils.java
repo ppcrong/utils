@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static android.content.Context.POWER_SERVICE;
 
@@ -288,6 +289,12 @@ public class MiscUtils {
         return false;
     }
 
+    /**
+     * Get formatted time string
+     *
+     * @param time The timestamp
+     * @return The formatted time string
+     */
     public static String getFormattedTime(long time) {
 
         if (time >= 0) {
@@ -359,7 +366,15 @@ public class MiscUtils {
     // endregion [Connection]
 
     // region [Asset]
-    public static String loadJsonAsset(Context ctx, String fileName) {
+
+    /**
+     * Load asset file content
+     *
+     * @param ctx      The context
+     * @param fileName The file name
+     * @return The string content of asset
+     */
+    public static String loadAssetFile(Context ctx, String fileName) {
 
         String json = "";
         InputStream is = null;
@@ -399,4 +414,23 @@ public class MiscUtils {
         return m.matches();
     }
     // endregion [Check]
+
+    // region [Demo]
+    public static String getDemoDeviceName(String deviceName) {
+
+        int deviceNum = ThreadLocalRandom.current().nextInt(1, 99999);
+        return String.format("%s_%05d", deviceName, deviceNum);
+    }
+
+    public static String getDemoMac() {
+
+        int mac1 = ThreadLocalRandom.current().nextInt(1, 256);
+        int mac2 = ThreadLocalRandom.current().nextInt(1, 256);
+        int mac3 = ThreadLocalRandom.current().nextInt(1, 256);
+        int mac4 = ThreadLocalRandom.current().nextInt(1, 256);
+        int mac5 = ThreadLocalRandom.current().nextInt(1, 256);
+        int mac6 = ThreadLocalRandom.current().nextInt(1, 256);
+        return String.format("%02X:%02X:%02X:%02X:%02X:%02X", mac1, mac2, mac3, mac4, mac5, mac6);
+    }
+    // endregion [Demo]
 }
