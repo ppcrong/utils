@@ -63,7 +63,7 @@ public class TimeoutUtil {
 
     // region [Builder]
     public static class Builder {
-        private long timeout;
+        private long timeout = TIMEOUT_6S;
         private onTimeoutListener listener;
 
         public Builder setTimeout(long timeout) {
