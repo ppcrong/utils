@@ -95,9 +95,7 @@ public class MiscUtils {
             sb.append(String.format("%02X", b));
         }
 
-        String str = sb.toString();
-        KLog.i(str);
-        return str;
+        return sb.toString();
     }
 
     /**
@@ -119,30 +117,10 @@ public class MiscUtils {
         for (byte b : bytes) {
 
             if (sb.length() > 0 && appendSeparator) sb.append(separator);
-            sb.append(b);
+            sb.append(getSignedByteToInt(b));
         }
 
-        String str = sb.toString();
-        KLog.i(str);
-        return str;
-    }
-
-    /**
-     * Convert byte to unsigned byte
-     * <br/>
-     * EX: If value is signed byte, for example, 0x8E, int value will get  -114, but we want the value is unsigned byte value 142
-     * <br/>
-     * byte b = (byte) 0x8E;
-     * <br/>
-     * int i = b;
-     * <br/>
-     * The i value will be -114.
-     *
-     * @param b The byte
-     * @return Unsigned short value
-     */
-    public static short getByteToUByte(byte b) {
-        return (short) (b & 0xFF);
+        return sb.toString();
     }
 
     /**
@@ -156,32 +134,35 @@ public class MiscUtils {
     }
 
     /**
+     * Convert signed bytes to a 16-bit unsigned int.
+     */
+    public static int getBytesToInt(byte b0, byte b1) {
+
+        return (getSignedByteToInt(b0) + (getSignedByteToInt(b1) << 8));
+    }
+
+    /**
      * Convert signed bytes to a 32-bit unsigned int.
      */
-    public static int getUnsignedBytesToInt(byte b0, byte b1, byte b2, byte b3) {
+    public static int getBytesToInt(byte b0, byte b1, byte b2, byte b3) {
 
-        return (getUnsignedByteToInt(b0) + (getUnsignedByteToInt(b1) << 8))
-                + (getUnsignedByteToInt(b2) << 16) + (getUnsignedByteToInt(b3) << 24);
+        return (getSignedByteToInt(b0) + (getSignedByteToInt(b1) << 8))
+                + (getSignedByteToInt(b2) << 16) + (getSignedByteToInt(b3) << 24);
     }
 
     /**
      * Convert a signed byte to an unsigned int.
+     * <br/>
+     * EX: If value is signed byte, for example, 0x8E, int value will get  -114, but we want the value is unsigned byte value 142
+     * <br/>
+     * byte b = (byte) 0x8E;
+     * <br/>
+     * int i = b;
+     * <br/>
+     * The i value will be -114.
      */
-    public static int getUnsignedByteToInt(byte b) {
+    public static int getSignedByteToInt(byte b) {
         return b & 0xFF;
-    }
-
-    /**
-     * Convert 2 bytes to signed short.
-     *
-     * @param b0
-     * @param b1
-     * @return
-     */
-    public static short getBytesToShort(byte b0, byte b1) {
-
-        // bytes to short conversion
-        return (short) ((short) (b0) | (short) (b1 << 8)); // Little-Endian
     }
 
     /**
@@ -236,7 +217,6 @@ public class MiscUtils {
         b.putInt(n);
 
         byte[] result = b.array();
-        KLog.i(getByteToHexString(result, ":", true));
 
         return result;
     }
