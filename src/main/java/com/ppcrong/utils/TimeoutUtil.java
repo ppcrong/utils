@@ -1,6 +1,7 @@
 package com.ppcrong.utils;
 
 import android.os.Handler;
+import android.os.Looper;
 
 /**
  * Utility for timeout
@@ -22,7 +23,7 @@ public class TimeoutUtil {
     // region [Variable]
     private long mTimeout = TIMEOUT_6S;
     private onTimeoutListener mTimeoutListener;
-    private Handler mSyncTimeoutHandler = new Handler();
+    private Handler mSyncTimeoutHandler;
     private Runnable mSyncTimeoutRunnable = new Runnable() {
         @Override
         public void run() {
@@ -35,9 +36,16 @@ public class TimeoutUtil {
     };
     // endregion [Variable]
 
-    public TimeoutUtil(long timeout, onTimeoutListener listener) {
+    public TimeoutUtil(long timeout, onTimeoutListener listener, boolean forceMainLooper) {
         this.mTimeout = timeout;
         this.mTimeoutListener = listener;
+        if (forceMainLooper) {
+
+            this.mSyncTimeoutHandler = new Handler(Looper.getMainLooper());
+        } else {
+
+            this.mSyncTimeoutHandler = new Handler();
+        }
     }
 
     public void setTimeoutListener(onTimeoutListener listener) {
@@ -66,6 +74,8 @@ public class TimeoutUtil {
         private long timeout = TIMEOUT_6S;
         private onTimeoutListener listener;
 
+        private boolean forceMainLooper;
+
         public Builder setTimeout(long timeout) {
             this.timeout = timeout;
             return this;
@@ -76,8 +86,13 @@ public class TimeoutUtil {
             return this;
         }
 
+        public Builder setForceMainLooper(boolean forceMainLooper) {
+            this.forceMainLooper = forceMainLooper;
+            return this;
+        }
+
         public TimeoutUtil build() {
-            return new TimeoutUtil(timeout, listener);
+            return new TimeoutUtil(timeout, listener, forceMainLooper);
         }
     }
     // endregion [Builder]
