@@ -279,7 +279,7 @@ public class MiscUtils {
 
         if (time >= 0) {
             String formattedTime;
-            SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy.MM.dd-HH:mm:ss", Locale.US);
+            SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy.MM.dd_HH:mm:ss", Locale.US);
             formattedTime = timeFormat.format(new Date(time));
             return formattedTime;
         } else {

@@ -213,7 +213,7 @@ public class MiscUtilsTest {
 
         // Month is Jan(0)~Dec(11)
         time.set(2000, 2, 6, 10, 20, 30);
-        assertEquals("2000.03.06-10:20:30",
+        assertEquals("2000.03.06_10:20:30",
                 MiscUtils.getFormattedTime(time.getTimeInMillis()));
 
         assertEquals("-1",
