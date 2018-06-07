@@ -150,6 +150,16 @@ public class MiscUtils {
                 + (getSignedByteToInt(b2) << 16) + (getSignedByteToInt(b3) << 24);
     }
 
+    public static float getBytesToFloat(byte[] bytes, int offset) {
+
+        int asInt = (bytes[offset] & 0xFF)
+                | ((bytes[offset + 1] & 0xFF) << 8)
+                | ((bytes[offset + 2] & 0xFF) << 16)
+                | ((bytes[offset + 3] & 0xFF) << 24);
+
+        return Float.intBitsToFloat(asInt);
+    }
+
     /**
      * Convert a signed byte to an unsigned int.
      * <br/>
