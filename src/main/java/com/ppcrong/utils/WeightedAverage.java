@@ -12,6 +12,10 @@ public class WeightedAverage {
     private static final float W2 = 0.2f;
     private boolean isFirstNumber = true;
 
+    public WeightedAverage() {
+
+    }
+
     // region [Last Number has dependency with all history numbers]
     public void add(float number) {
 
@@ -34,6 +38,17 @@ public class WeightedAverage {
     private float[] weights = new float[]{0.3f, 0.7f};
     private LimitQueue<Float> lqueue = new LimitQueue<>(weights.length);
     private float currentNumber;
+
+    public WeightedAverage(float[] weights) {
+
+        setWeights(weights);
+    }
+
+    public void setWeights(float[] weights) {
+
+        this.weights = weights;
+        lqueue = new LimitQueue<>(weights.length);
+    }
 
     public void offer(float number) {
 
