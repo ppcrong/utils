@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import java.util.Calendar;
 
@@ -17,7 +16,6 @@ import static org.junit.Assert.assertNull;
  * MiscUtilsTest
  */
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 26)
 public class MiscUtilsTest {
     @Before
     public void setUp() throws Exception {

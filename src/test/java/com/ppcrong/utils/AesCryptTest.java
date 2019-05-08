@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import java.math.BigInteger;
 import java.security.Security;
@@ -13,13 +12,12 @@ import java.security.Security;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * AesCryptTest
  */
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 26)
 public class AesCryptTest {
     @Before
     public void setUp() throws Exception {
