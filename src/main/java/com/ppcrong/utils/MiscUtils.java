@@ -82,7 +82,7 @@ public class MiscUtils {
      */
     public static String getIntToBitArrayString(int num, int byteNum) {
 
-        if (4 < byteNum && byteNum <= 0) {
+        if (4 < byteNum || byteNum <= 0) {
             return "not supported out of range 1~4";
         }
 
