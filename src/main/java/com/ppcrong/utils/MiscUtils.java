@@ -63,14 +63,40 @@ public class MiscUtils {
     // region [Conversion]
 
     /**
-     * Convert integer to bit array string
+     * Convert integer to bit array string (default 1 byte)
      *
      * @param num integer number
      * @return bit array string
      */
     public static String getIntToBitArrayString(int num) {
 
-        return String.format("%8s", Integer.toBinaryString(num & 0xFF)).replace(' ', '0');
+        return getIntToBitArrayString(num, 1);
+    }
+
+    /**
+     * Convert integer to bit array string
+     *
+     * @param num integer number
+     * @param byteNum how many bytes (now support 1~4)
+     * @return bit array string
+     */
+    public static String getIntToBitArrayString(int num, int byteNum) {
+
+        if (4 < byteNum && byteNum <= 0) {
+            return "not supported out of range 1~4";
+        }
+
+        switch (byteNum) {
+            case 1:
+            default:
+                return String.format("%8s", Integer.toBinaryString(num & 0xFF)).replace(' ', '0');
+            case 2:
+                return String.format("%16s", Integer.toBinaryString(num & 0xFFFF)).replace(' ', '0');
+            case 3:
+                return String.format("%24s", Integer.toBinaryString(num & 0xFFFFFF)).replace(' ', '0');
+            case 4:
+                return String.format("%32s", Integer.toBinaryString(num & 0xFFFFFFFF)).replace(' ', '0');
+        }
     }
 
     /**

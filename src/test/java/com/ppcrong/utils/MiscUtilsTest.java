@@ -46,6 +46,18 @@ public class MiscUtilsTest {
         expected = 0b01010101;
         result = MiscUtils.getIntToBitArrayString(expected);
         assertEquals(true, "01010101".equalsIgnoreCase(result));
+
+        expected = 0b0101010101010101;
+        result = MiscUtils.getIntToBitArrayString(expected, 2);
+        assertEquals(true, "0101010101010101".equalsIgnoreCase(result));
+
+        expected = 0b010101010101010101010101;
+        result = MiscUtils.getIntToBitArrayString(expected, 3);
+        assertEquals(true, "010101010101010101010101".equalsIgnoreCase(result));
+
+        expected = 0b01010101010101010101010101010101;
+        result = MiscUtils.getIntToBitArrayString(expected, 4);
+        assertEquals(true, "01010101010101010101010101010101".equalsIgnoreCase(result));
     }
 
     @Test
