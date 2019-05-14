@@ -184,12 +184,14 @@ public class MiscUtils {
      */
     public static float getBytesToFloat(byte[] bytes, int offset) {
 
-        int asInt = (bytes[offset] & 0xFF)
-                | ((bytes[offset + 1] & 0xFF) << 8)
-                | ((bytes[offset + 2] & 0xFF) << 16)
-                | ((bytes[offset + 3] & 0xFF) << 24);
-
-        return Float.intBitsToFloat(asInt);
+        return ByteBuffer.wrap(bytes, offset, 4)
+                .order(ByteOrder.LITTLE_ENDIAN).getFloat();
+//        int asInt = (bytes[offset] & 0xFF)
+//                | ((bytes[offset + 1] & 0xFF) << 8)
+//                | ((bytes[offset + 2] & 0xFF) << 16)
+//                | ((bytes[offset + 3] & 0xFF) << 24);
+//
+//        return Float.intBitsToFloat(asInt);
     }
 
     /**
@@ -200,16 +202,18 @@ public class MiscUtils {
      */
     public static double getBytesToDouble(byte[] bytes, int offset) {
 
-        long asLong = (bytes[offset] & 0xFF)
-                | ((long) (bytes[offset + 1] & 0xFF) << 8)
-                | ((long) (bytes[offset + 2] & 0xFF) << 16)
-                | ((long) (bytes[offset + 3] & 0xFF) << 24)
-                | ((long) (bytes[offset + 4] & 0xFF) << 32)
-                | ((long) (bytes[offset + 5] & 0xFF) << 40)
-                | ((long) (bytes[offset + 6] & 0xFF) << 48)
-                | ((long) (bytes[offset + 7] & 0xFF) << 56);
-
-        return Double.longBitsToDouble(asLong);
+        return ByteBuffer.wrap(bytes, offset, 8)
+                .order(ByteOrder.LITTLE_ENDIAN).getDouble();
+//        long asLong = (bytes[offset] & 0xFF)
+//                | ((long) (bytes[offset + 1] & 0xFF) << 8)
+//                | ((long) (bytes[offset + 2] & 0xFF) << 16)
+//                | ((long) (bytes[offset + 3] & 0xFF) << 24)
+//                | ((long) (bytes[offset + 4] & 0xFF) << 32)
+//                | ((long) (bytes[offset + 5] & 0xFF) << 40)
+//                | ((long) (bytes[offset + 6] & 0xFF) << 48)
+//                | ((long) (bytes[offset + 7] & 0xFF) << 56);
+//
+//        return Double.longBitsToDouble(asLong);
     }
 
     /**
