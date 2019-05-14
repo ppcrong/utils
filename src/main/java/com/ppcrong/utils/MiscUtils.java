@@ -176,6 +176,12 @@ public class MiscUtils {
                 + (getSignedByteToInt(b2) << 16) + (getSignedByteToInt(b3) << 24);
     }
 
+    /**
+     * Convert byte array to float.
+     * @param bytes byte array
+     * @param offset offset
+     * @return float
+     */
     public static float getBytesToFloat(byte[] bytes, int offset) {
 
         int asInt = (bytes[offset] & 0xFF)
@@ -184,6 +190,26 @@ public class MiscUtils {
                 | ((bytes[offset + 3] & 0xFF) << 24);
 
         return Float.intBitsToFloat(asInt);
+    }
+
+    /**
+     * Convert byte array to double.
+     * @param bytes byte arraymis
+     * @param offset offset
+     * @return
+     */
+    public static double getBytesToDouble(byte[] bytes, int offset) {
+
+        long asLong = (bytes[offset] & 0xFF)
+                | ((long) (bytes[offset + 1] & 0xFF) << 8)
+                | ((long) (bytes[offset + 2] & 0xFF) << 16)
+                | ((long) (bytes[offset + 3] & 0xFF) << 24)
+                | ((long) (bytes[offset + 4] & 0xFF) << 32)
+                | ((long) (bytes[offset + 5] & 0xFF) << 40)
+                | ((long) (bytes[offset + 6] & 0xFF) << 48)
+                | ((long) (bytes[offset + 7] & 0xFF) << 56);
+
+        return Double.longBitsToDouble(asLong);
     }
 
     /**

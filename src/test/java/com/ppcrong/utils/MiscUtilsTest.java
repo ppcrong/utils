@@ -155,6 +155,36 @@ public class MiscUtilsTest {
     }
 
     @Test
+    public void getBytesToFloat() throws Exception {
+
+        byte[] expected;
+        float result;
+
+        expected = new byte[] {0x00, (byte) 0x80, 0x28, 0x43};
+        result = MiscUtils.getBytesToFloat(expected, 0);
+        assertEquals(168.5f, result, 0f); // 0x43288000=168.5
+
+        expected = new byte[] {(byte) 0x9A, (byte) 0x99, 0x6D, 0x42};
+        result = MiscUtils.getBytesToFloat(expected, 0);
+        assertEquals(59.4f, result, 0f); // 0x426D999A=59.4
+    }
+
+    @Test
+    public void getBytesToDouble() throws Exception {
+
+        byte[] expected;
+        double result;
+
+        expected = new byte[] {(byte) 0x80, 0x44, 0x13, 0x28, 0x62, 0x0D, 0x39, 0x40};
+        result = MiscUtils.getBytesToDouble(expected, 0);
+        assertEquals(25.052279d, result, 0d); // 0x40390D6228134480=25.052279
+
+        expected = new byte[] {(byte) 0xE1, (byte) 0xD2, 0x31, (byte) 0xE7, 0x19, 0x61, 0x5E, 0x40};
+        result = MiscUtils.getBytesToDouble(expected, 0);
+        assertEquals(121.517206d, result, 0d); // 0x405E6119E731D2E1=121.517206
+    }
+
+    @Test
     public void getSignedByteToInt() throws Exception {
 
         byte expected;
