@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.PowerManager;
 import android.util.Log;
 
@@ -15,6 +16,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -285,6 +287,15 @@ public class MiscUtils {
         byte[] result = b.array();
 
         return result;
+    }
+
+    // Refer to https://stackoverflow.com/questions/13783295/getting-all-names-in-an-enum-as-a-string
+    public static String[] getEnumNames(Class<? extends Enum<?>> e) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return Arrays.stream(e.getEnumConstants()).map(Enum::name).toArray(String[]::new);
+        } else {
+            return Arrays.toString(e.getEnumConstants()).replaceAll("^.|.$", "").split(", ");
+        }
     }
     // endregion [Conversion]
 
