@@ -1,10 +1,13 @@
 package com.ppcrong.utils;
 
+import android.os.Build;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.util.Calendar;
 
@@ -15,6 +18,7 @@ import static org.junit.Assert.assertNull;
 /**
  * MiscUtilsTest
  */
+@Config(sdk = Build.VERSION_CODES.P) // Workaround for Robolectric issue https://github.com/robolectric/robolectric/issues/5207
 @RunWith(RobolectricTestRunner.class)
 public class MiscUtilsTest {
     @Before

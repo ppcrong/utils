@@ -3,7 +3,6 @@ package com.ppcrong.utils;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.PowerManager;
 import android.util.Log;
@@ -78,7 +77,7 @@ public class MiscUtils {
     /**
      * Convert integer to bit array string
      *
-     * @param num integer number
+     * @param num     integer number
      * @param byteNum how many bytes (now support 1~4)
      * @return bit array string
      */
@@ -180,7 +179,8 @@ public class MiscUtils {
 
     /**
      * Convert byte array to float.
-     * @param bytes byte array
+     *
+     * @param bytes  byte array
      * @param offset offset
      * @return float
      */
@@ -198,7 +198,8 @@ public class MiscUtils {
 
     /**
      * Convert byte array to double.
-     * @param bytes byte arraymis
+     *
+     * @param bytes  byte arraymis
      * @param offset offset
      * @return
      */
@@ -411,12 +412,23 @@ public class MiscUtils {
     // endregion [WakeLock]
 
     // region [Connection]
+
+    /**
+     * Check if internet connected
+     *
+     * @param ctx context
+     * @return true is connected, false is not
+     * @deprecated NetworkInfo.getActiveNetworkInfo is deprecated since API29 (Android Q)
+     */
+    @Deprecated
     public static boolean isInternetConnected(Context ctx) {
 
-        ConnectivityManager cm = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected()) {
-            return true;
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            ConnectivityManager cm = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+            android.net.NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+            if (networkInfo != null && networkInfo.isConnected()) {
+                return true;
+            }
         }
         return false;
     }
