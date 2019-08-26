@@ -423,12 +423,10 @@ public class MiscUtils {
     @Deprecated
     public static boolean isInternetConnected(Context ctx) {
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-            ConnectivityManager cm = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
-            android.net.NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-            if (networkInfo != null && networkInfo.isConnected()) {
-                return true;
-            }
+        ConnectivityManager cm = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+        android.net.NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            return true;
         }
         return false;
     }
